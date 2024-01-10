@@ -19,6 +19,16 @@ try{
    process.exit(1)
 }
 
+app.use((err,req,res,next)=>{
+  const statusCode = err.statusCode || 500
+  const message = err.message || "internaserver error"
+  return res.status(statusCode).json({
+    success:false,
+    statusCode,
+    message
+  })
+})
+
 app.listen(3000,()=>{
     console.log("server started")
 })
