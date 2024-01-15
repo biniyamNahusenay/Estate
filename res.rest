@@ -5,7 +5,16 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-    "username":"abebe3",
-    "email":"abebe3@gmail.com",
-    "password":"12345"
+    "username":"abebe4",
+    "email":"abebe4@gmail.com",
+    "password":"12345abcdefg"
+}
+###
+
+POST http://localhost:3000/api/auth/signin
+Content-Type: application/json
+
+{
+     "email":"abebe4@gmail.com",
+    "password":"12345abcdefg"
 }

@@ -1,5 +1,7 @@
 const User = require("../models/userModel")
 const bcrypt = require("bcryptjs")
+const { errorHandler } = require("../utils/err")
+const jwt = require("jsonwebtoken")
 
 const Signup = async (req,res,next)=>{
   const {username,email,password} = req.body
@@ -18,6 +20,25 @@ const Signup = async (req,res,next)=>{
   }
 }
 
+const Signin = async (req,res,next)=>{
+  const {email,password} = req.body
+  try{
+    const validUser = await User.findOne({email})
+    if(!validUser) return next(errorHandler(404,"User not found"))
+    const validPassword = await bcrypt.compareSync(password,validUser.password)
+    if(!validPassword) return next(errorHandler(401,"wrong credentials"))
+    const token = await jwt.sign({id:validUser._id},process.env.JWT_SECRET)
+   const {password:pass, ...rest } = validUser._doc;
+    res
+      .cookie('access_token', token, { httpOnly: true })
+      .status(200)
+      .json(rest);
+  }catch(err){
+    next(err)
+  }
+ 
+}
 module.exports = {
-    Signup
+    Signup,
+    Signin
 }
