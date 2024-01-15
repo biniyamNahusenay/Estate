@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "jsonwebtoken": "^9.0.2"
+    "@reduxjs/toolkit": "^2.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "react-redux": "^9.1.0"
   }
 }
