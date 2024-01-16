@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    avatar:{
+        type:String,
+        default:"https://g.co/kgs/DZnw1f6"
+    },
 },
 {timeStamp:true}
 )
