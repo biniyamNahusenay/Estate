@@ -2,7 +2,7 @@ const express = require("express")
 const env = require("dotenv").config() 
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/userRoutes")
-//const authRoutes = require("./routes/authRoutes")
+const authRoutes = require("./routes/authRoutes")
 const cors = require("cors")
 const app = express()
 
@@ -10,6 +10,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/api/user", userRoutes)
+app.use("/api/auth", authRoutes)
 
 try{
     mongoose.connect(process.env.mongo_url)
